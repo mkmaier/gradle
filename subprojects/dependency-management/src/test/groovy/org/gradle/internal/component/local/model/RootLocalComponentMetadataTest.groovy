@@ -22,6 +22,8 @@ import org.gradle.api.internal.attributes.AttributeContainerInternal
 import org.gradle.api.internal.attributes.AttributesSchemaInternal
 import org.gradle.api.internal.attributes.ImmutableAttributes
 import org.gradle.internal.component.external.model.ImmutableCapabilities
+import org.gradle.internal.locking.DefaultLockConstraint
+import org.gradle.internal.locking.EmptyLockConstraint
 
 class RootLocalComponentMetadataTest extends DefaultLocalComponentMetadataTest {
     def dependencyLockingHandler = Mock(DependencyLockingProvider)
@@ -30,8 +32,8 @@ class RootLocalComponentMetadataTest extends DefaultLocalComponentMetadataTest {
     def 'locking constraints are attached to a configuration and not its children'() {
         given:
         def constraint = new DefaultDependencyConstraint('org', 'foo', '1.1')
-        dependencyLockingHandler.findLockedDependencies("conf") >> ([constraint] as Set)
-        dependencyLockingHandler.findLockedDependencies("child") >> Collections.emptySet()
+        dependencyLockingHandler.findLockConstraint("conf") >> new DefaultLockConstraint([constraint] as Set)
+        dependencyLockingHandler.findLockConstraint("child") >> EmptyLockConstraint.instance
         addConfiguration('conf')
         addConfiguration('child', ['conf'])
 
