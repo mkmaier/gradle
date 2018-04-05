@@ -128,7 +128,7 @@ public class JsHint extends SourceTask {
         JsHintProtocol worker = handleFactory.create(getRhinoClasspath(), JsHintProtocol.class, JsHintWorker.class, logLevel, getProject().getProjectDir());
 
         JsHintSpec spec = new JsHintSpec();
-        spec.setSource(getSource().getFiles()); // flatten because we need to serialize
+        spec.setSource(getSource()); // flatten because we need to serialize
         spec.setEncoding(getEncoding());
         spec.setJsHint(getJsHint().getSingleFile());
 

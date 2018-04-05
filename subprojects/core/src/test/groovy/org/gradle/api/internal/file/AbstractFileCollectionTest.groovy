@@ -92,7 +92,7 @@ class AbstractFileCollectionTest extends Specification {
             collection.getSingleFile();
             fail();
         } catch (IllegalStateException e) {
-            assertThat(e.getMessage(), equalTo("Expected collection-display-name to contain exactly one file, however, it contains 2 files."));
+            assertThat(e.getMessage(), equalTo("Expected collection-display-name to contain exactly one file, however, it contains more than one file."));
         }
     }
 
