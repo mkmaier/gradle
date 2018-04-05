@@ -446,7 +446,7 @@ class AbstractFileCollectionTest extends Specification {
         assertThat(tree.getBuildDependencies().getDependencies(task), equalTo((Object) toSet(depTask)));
     }
 
-    private class TestFileCollection extends AbstractFileCollection {
+    static class TestFileCollection extends AbstractFileCollection {
         Set<File> files = new LinkedHashSet<File>();
 
         TestFileCollection(File... files) {
